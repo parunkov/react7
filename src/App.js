@@ -1,7 +1,7 @@
 import './App.css';
 import { useEffect } from 'react';
 // import store from './redux/store';
-import TableContainer from './components/TableContainer';
+import TableContainer from './components/Table/TableContainer';
 
 function App() {
   useEffect(() => {
