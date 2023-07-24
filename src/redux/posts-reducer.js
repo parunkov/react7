@@ -4,6 +4,7 @@ const initialState = {
 }
 
 const LOAD_POSTS = 'posts/LOAD_POSTS';
+const CHANGE_PAGE = 'posts/CHANGE_PAGE';
 
 const postsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -11,6 +12,12 @@ const postsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 posts: action.posts
+            }
+        }
+        case CHANGE_PAGE: {
+            return {
+                ...state,
+                currentPage: action.currentPage
             }
         }
         default:
@@ -23,8 +30,13 @@ export const load = (posts) => ({
     posts
 });
 
+export const changePage = (currentPage) => ({
+    type: CHANGE_PAGE,
+    currentPage
+})
+
 export const loadPosts = (currentPage) => async(dispatch) => {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_start=${currentPage * 10 - 1}&_limit=10`);
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_start=${(currentPage - 1) * 10}&_limit=10`);
     const posts = await response.json();
     dispatch(load(posts));
 }

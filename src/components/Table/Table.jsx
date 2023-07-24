@@ -4,6 +4,7 @@ const Table = ({posts, currentPage, loadPosts}) => {
     useEffect(() => {
         loadPosts();
         console.log(posts);
+        // console.log(currentPage);
     }, []);
 
     const TableRow = ({id, title, body}) => {

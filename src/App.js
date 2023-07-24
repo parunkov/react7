@@ -2,6 +2,7 @@ import './App.css';
 import { useEffect } from 'react';
 // import store from './redux/store';
 import TableContainer from './components/Table/TableContainer';
+import Pagination from './components/Pagination/PaginationContainer';
 
 function App() {
   useEffect(() => {
@@ -19,6 +20,7 @@ function App() {
   return (
     <div className="App">
       <TableContainer />
+      <Pagination />
     </div>
   );
 }
