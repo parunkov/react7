@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import './Pagination.scss';
 
 const Pagination = ({ currentPage, changePage, loadPosts }) => {
-    console.log(currentPage);
     const totalPages = 10;
     const [pages, setPages] = useState([]);
 
@@ -46,10 +45,10 @@ const Pagination = ({ currentPage, changePage, loadPosts }) => {
         setPagesValues(+event.target.dataset.page);
         loadPosts(+event.target.dataset.page);
     }
-
+    console.log();
     return (
         <div className="pagination">
-            <div className="pagination__block" onClick={onMinusClick}>Назад</div>
+            <div className={`pagination__block ${+currentPage === 1 ? 'pagination__block_hidden' : ''}`} onClick={onMinusClick}>Назад</div>
             <div className="pagination__block">
                 {pages.map((page) => (
                     <div 
@@ -60,7 +59,7 @@ const Pagination = ({ currentPage, changePage, loadPosts }) => {
                     >{page}</div>
                 ))}
             </div>
-            <div className="pagination__block" onClick={onPlusClick}>Далее</div>
+            <div className={`pagination__block ${+currentPage === totalPages ? 'pagination__block_hidden' : ''}`} onClick={onPlusClick}>Далее</div>
         </div>
     )
 }
