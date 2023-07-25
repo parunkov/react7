@@ -42,9 +42,9 @@ const Pagination = ({ currentPage, changePage, loadPosts }) => {
     }
     
     const onPageClick = (event) => {
-        changePage(event.target.dataset.page);
-        setPagesValues(event.target.dataset.page);
-        loadPosts(event.target.dataset.page);
+        changePage(+event.target.dataset.page);
+        setPagesValues(+event.target.dataset.page);
+        loadPosts(+event.target.dataset.page);
     }
 
     return (
@@ -53,7 +53,7 @@ const Pagination = ({ currentPage, changePage, loadPosts }) => {
             <div className="pagination__block">
                 {pages.map((page) => (
                     <div 
-                        className={`pagination__page ${page === currentPage ? 'pagination__page_active' : ''}`} 
+                        className={`pagination__page ${+page === +currentPage ? 'pagination__page_active' : ''}`} 
                         key={page}
                         data-page={page}
                         onClick={onPageClick}
