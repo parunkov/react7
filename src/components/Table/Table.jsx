@@ -1,11 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from 'react';
 
 const Table = ({posts, currentPage, loadPosts}) => {
+    const [filteredPocts, setFilteredPosts] = useState(posts);
+    const [column, setColumn] = useState(null);
+    const [numberSort, setNumberSort] = useState(false);
+    const [reverseSort, setReverseSort] = useState(false);
+
     useEffect(() => {
-        loadPosts();
-        console.log(posts);
-        // console.log(currentPage);
-    }, []);
+        if (posts.length === 0) loadPosts(currentPage);
+        setFilteredPosts(posts);
+    }, [currentPage, loadPosts, posts]);
 
     const TableRow = ({id, title, body}) => {
         return (
@@ -26,7 +30,7 @@ const Table = ({posts, currentPage, loadPosts}) => {
                         <th>Заголовок</th>
                         <th>Описание</th>
                     </tr>
-                    {posts.map((post) => <TableRow key={post.id} id={post.id} title={post.title} body={post.body} />)}
+                    {filteredPocts.map((post) => <TableRow key={post.id} id={post.id} title={post.title} body={post.body} />)}
                 </tbody>
             </table>
         </div>
