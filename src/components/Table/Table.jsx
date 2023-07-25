@@ -6,13 +6,24 @@ const Table = ({ posts, currentPage, loadPosts }) => {
         value: '',
         column: null,
         numberSort: true,
-        reverseSort: false
+        reverseSort: false 
     });
+    const [savedPage, setSavedPage] = useState(currentPage);
 
     useEffect(() => {
         if (posts.length === 0) loadPosts(currentPage);
         if (filterValue.value.length === 0 && !filterValue.column) setFilteredPosts(posts);
-    }, [currentPage, filterValue, filteredPocts, loadPosts, posts]);
+        if (currentPage !== savedPage) {
+            setSavedPage(currentPage);
+            setFilterValue({
+                value: '',
+                column: null,
+                numberSort: true,
+                reverseSort: false 
+            });
+            loadPosts(currentPage);
+        }
+    }, [currentPage, filterValue, filteredPocts, loadPosts, posts, savedPage]);
 
     const filterSortPosts = (posts, { value, column, numberSort, reverseSort }) => {
         let newPosts = [];
