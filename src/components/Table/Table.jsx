@@ -15,11 +15,20 @@ const Table = ({ posts, currentPage, loadPosts }) => {
     }, [currentPage, filterValue, filteredPocts, loadPosts, posts]);
 
     const filterSortPosts = (posts, { value, column, numberSort, reverseSort }) => {
-        console.log(value);
-        const newPosts = posts.filter((item) => item.id.toString().includes(value)
+        let newPosts = [];
+        const newFilterdPosts = posts.filter((item) => item.id.toString().includes(value)
         || item.title.toLowerCase().includes(value.toLowerCase())
-        || item.body.toLowerCase().includes(value.toLowerCase()))
-        console.log(newPosts);
+        || item.body.toLowerCase().includes(value.toLowerCase()));
+        if (!column) {
+            newPosts = newFilterdPosts;
+        } else {
+            if (numberSort) {
+                newPosts = newFilterdPosts.sort((a, b) => a[column] - b[column]);
+            } else {
+                newPosts = newFilterdPosts.sort((a, b) => a[column].localeCompare(b[column]));
+            }
+        }
+        if (reverseSort) return newPosts.reverse();
         return newPosts;
     };
 
@@ -30,13 +39,14 @@ const Table = ({ posts, currentPage, loadPosts }) => {
     }
 
     const onColumnClick = (event) => {
-        console.log(event.target.dataset.name);
         if (event.target.dataset.name === filterValue.column) {
-            console.log(3333);
-            // setColumn(event.target.dataset.name);
+            const newFilterValue = {...filterValue, reverseSort: !filterValue.reverseSort};
+            setFilterValue(newFilterValue);
+            setFilteredPosts(filterSortPosts(posts, newFilterValue));
         } else {
-            console.log(2222);
-            // setColumn(event.target.dataset.name);
+            const newFilterValue = {...filterValue, column: event.target.dataset.name, numberSort: event.target.dataset.name === 'id', reverseSort: false};
+            setFilterValue(newFilterValue);
+            setFilteredPosts(filterSortPosts(posts, newFilterValue));
         }
     }
 
