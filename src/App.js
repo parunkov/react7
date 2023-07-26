@@ -19,8 +19,10 @@ function App() {
 
   return (
     <div className="App">
-      <TableContainer />
-      <Pagination />
+      <div className="container">
+        <TableContainer />
+        <Pagination />
+      </div>
     </div>
   );
 }
