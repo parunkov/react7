@@ -82,9 +82,9 @@ const Table = ({ posts, currentPage, loadPosts }) => {
     const TableRow = ({ id, title, body }) => {
         return (
             <tr>
-                <td>{id}</td>
-                <td>{title}</td>
-                <td>{body}</td>
+                <td className={styles.td}>{id}</td>
+                <td className={styles.td}>{title}</td>
+                <td className={styles.td}>{body}</td>
             </tr>
         )
     }
@@ -92,7 +92,7 @@ const Table = ({ posts, currentPage, loadPosts }) => {
     return (
         <div>
             <input type="text" className="input" onInput={onFilterInput} value={filterValue.value} />
-            <table>
+            <table className={styles.table}>
                 <tbody>
                     <tr>
                         <TableTitle
