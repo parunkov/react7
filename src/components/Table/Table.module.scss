@@ -1,10 +1,11 @@
 .tableWrapper {
     text-align: left;
+    margin-bottom: 24px;
 }
 .inputWrapper {
     position: relative;
     width: 631px;
-    max-width: 100%;   
+    max-width: 100%;
 }
 .lens {
     position: absolute;
@@ -17,7 +18,7 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 19.3px;
-    background: #5A5C66;
+    background: #5a5c66;
     padding: 18px 26px;
     padding-bottom: 15px;
     padding-right: 50px;
@@ -33,6 +34,8 @@
     border-collapse: collapse;
 }
 .tableTitle {
+    padding-top: 19px;
+    padding-bottom: 16px;
     color: #fff;
     font-size: 14px;
     font-weight: 400;
@@ -41,20 +44,32 @@
     background: #474955;
     border: 1px solid #474955;
     text-align: center;
-}
-.id {
-    width: 10%;
-}
-.title {
-    width: 50%;
+    cursor: pointer;
+    &.id {
+        width: 10%;
+    }
+    &.title {
+        width: 50%;
+    }
 }
 .sort {
     display: inline-block;
-    margin-left: 20px;
+    margin-left: 25px;
+    @media (max-width: 767px) {
+        margin-left: 5px;
+    }
 }
 .reverse {
     transform: rotate(180deg);
 }
 .td {
+    padding: 10px;
+    color: #474955;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 18px;
     border: 1px solid #e3e6ec;
+    &.id {
+        text-align: center;
+    }
 }

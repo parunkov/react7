@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './Table.module.scss';
 import cn from 'classnames';
-console.log(styles);
 
 const Table = ({ posts, currentPage, loadPosts }) => {
     const [filteredPocts, setFilteredPosts] = useState(posts);
@@ -65,11 +64,12 @@ const Table = ({ posts, currentPage, loadPosts }) => {
     }
 
     const TableTitle = ({ id, column, reverseSort, onClick, text }) => {
-        console.log(reverseSort ? cn(styles.sort, styles.reverse) : styles.sort);
         return (
             <th className={cn(styles.tableTitle, styles[id])} data-name={id} onClick={onClick}>
                 {text}
-                {column === id ? <span className={reverseSort ? cn(styles.sort, styles.reverse) : styles.sort}>
+                {column === id ? <span 
+                    className={reverseSort ? cn(styles.sort, styles.reverse) : styles.sort} 
+                >
                     <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <line x1="0.353553" y1="0.646447" x2="6.18011" y2="6.47301" stroke="#FCFCFC" />
                         <line x1="5.64645" y1="6.30331" x2="11.3033" y2="0.646453" stroke="white" />
@@ -82,9 +82,9 @@ const Table = ({ posts, currentPage, loadPosts }) => {
     const TableRow = ({ id, title, body }) => {
         return (
             <tr>
-                <td className={styles.td}>{id}</td>
-                <td className={styles.td}>{title}</td>
-                <td className={styles.td}>{body}</td>
+                <td className={cn(styles.td, styles['id'])}>{id}</td>
+                <td className={cn(styles.td, styles['title'])}>{title}</td>
+                <td className={cn(styles.td, styles['body'])}>{body}</td>
             </tr>
         )
     }
@@ -101,7 +101,7 @@ const Table = ({ posts, currentPage, loadPosts }) => {
                 />
                 <div className={styles.lens}>
                     <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_16_77)">
+                        <g clipPath="url(#clip0_16_77)">
                             <path d="M20.7353 19.4958L14.7101 13.4663C15.8979 12.0418 16.6124 10.2213 16.6124 8.23301C16.6124 
                             3.69689 12.8896 0.00860596 8.31048 0.00860596C3.73132 0.00860596 0 3.70119 0 8.23731C0 12.7734 
                             3.72272 16.4617 8.30187 16.4617C10.2472 16.4617 12.0375 15.7946 13.4577 14.68L19.5045 20.7267C19.8574 
