@@ -1,0 +1,16 @@
+.title {
+    color: #fff;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 137.687%;
+    white-space: nowrap;
+    background: #474955;
+}
+.sort {
+    display: inline-block;
+    margin-left: 20px;
+}
+.reverse {
+    transform: rotate(180deg);
+}
