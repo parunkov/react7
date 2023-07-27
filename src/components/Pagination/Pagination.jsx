@@ -22,7 +22,7 @@ const Pagination = ({ currentPage, changePage, loadPosts }) => {
 
     useEffect(() => {
         setPagesValues(currentPage);
-        window.history.replaceState(null, 'New Page Title', `/?page=${currentPage}`);
+        window.history.replaceState(null, 'New Page Title', `/page=${currentPage}`);
     }, [currentPage]);
 
     const onPlusClick = () => {
