@@ -51,30 +51,30 @@ const Table = ({ posts, currentPage, loadPosts }) => {
         setFilteredPosts(filterSortPosts(posts, newFilterValue));
     }
 
-    const onColumnClick = (event) => {
-        if (event.target.dataset.name === filterValue.column) {
-            const newFilterValue = { ...filterValue, reverseSort: !filterValue.reverseSort };
-            setFilterValue(newFilterValue);
-            setFilteredPosts(filterSortPosts(posts, newFilterValue));
-        } else {
-            const newFilterValue = { ...filterValue, column: event.target.dataset.name, numberSort: event.target.dataset.name === 'id', reverseSort: false };
-            setFilterValue(newFilterValue);
-            setFilteredPosts(filterSortPosts(posts, newFilterValue));
+    const TableTitle = ({ id, column, reverseSort, text, setFilterValue }) => {
+        const onColumnClick = () => {
+            if (id === filterValue.column) {
+                const newFilterValue = { ...filterValue, reverseSort: !filterValue.reverseSort };
+                setFilterValue(newFilterValue);
+                setFilteredPosts(filterSortPosts(posts, newFilterValue));
+            } else {
+                const newFilterValue = { ...filterValue, column: id, numberSort: id === 'id', reverseSort: false };
+                setFilterValue(newFilterValue);
+                setFilteredPosts(filterSortPosts(posts, newFilterValue));
+            }
         }
-    }
 
-    const TableTitle = ({ id, column, reverseSort, onClick, text }) => {
         return (
-            <th className={cn(styles.tableTitle, styles[id])} data-name={id} onClick={onClick}>
+            <th className={cn(styles.tableTitle, styles[id])} data-name={id} onClick={onColumnClick}>
                 {text}
-                {column === id ? <span 
-                    className={reverseSort ? cn(styles.sort, styles.reverse) : styles.sort} 
+                <span 
+                    className={column === id ? (reverseSort ? cn(styles.sort, styles.reverse) : styles.sort) : styles.hiddenSpan} 
                 >
                     <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <line x1="0.353553" y1="0.646447" x2="6.18011" y2="6.47301" stroke="#FCFCFC" />
                         <line x1="5.64645" y1="6.30331" x2="11.3033" y2="0.646453" stroke="white" />
                     </svg>
-                </span> : ''}
+                </span>
             </th>
         )
     };
@@ -125,22 +125,22 @@ const Table = ({ posts, currentPage, loadPosts }) => {
                             id={'id'}
                             column={filterValue.column}
                             reverseSort={filterValue.reverseSort}
-                            onClick={onColumnClick}
                             text={'ID'}
+                            setFilterValue={setFilterValue}
                         />
                         <TableTitle
                             id={'title'}
                             column={filterValue.column}
                             reverseSort={filterValue.reverseSort}
-                            onClick={onColumnClick}
                             text={'Заголовок'}
+                            setFilterValue={setFilterValue}
                         />
                         <TableTitle
                             id={'body'}
                             column={filterValue.column}
                             reverseSort={filterValue.reverseSort}
-                            onClick={onColumnClick}
                             text={'Описание'}
+                            setFilterValue={setFilterValue}
                         />
                     </tr>
                     {filteredPocts.map((post) => <TableRow key={post.id} id={post.id} title={post.title} body={post.body} />)}
